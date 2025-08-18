@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静态"口"图形</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+        }
+        
+        .character-group {
+            position: absolute;
+            font-size: 24px;
+            line-height: 1.5;
+            white-space: pre;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <button id="showBtn">显示图形</button>
+    <div id="container"></div>
+    
+    <script>
+        document.getElementById('showBtn').addEventListener('click', function() {
+            const container = document.getElementById('container');
+            const group = document.createElement('div');
+            group.className = 'character-group';
+            
+            // 创建图形内容
+            group.innerHTML = `
+                <div>　　　　　　　　　　　　　　　　口</div>
+                <div>　　　　　　　　　　　　　　　　口</div>
+                <div>　　　　　　　　　　　　　　　　口</div>
+                <div>　　　　　　　　　　　      口　　　口</div>
+            `;
+            
+            // 随机位置（确保在可视区域内）
+            const maxX = container.clientWidth - 150;
+            const maxY = container.clientHeight - 150;
+            const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+            
+            group.style.left = randomX + 'px';
+            group.style.top = randomY + 'px';
+            
+            // 随机颜色
+            const hue = Math.floor(Math.random() * 360);
+            group.style.color = `hsl(${hue}, 80%, 50%)`;
+            
+            container.appendChild(group);
+        });
+    </script>
+</body>
+</html>
